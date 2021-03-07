@@ -24,8 +24,19 @@ public class GroupHelper extends BaseHelper {
         click(By.name("new"));
     }
 
-    public void returnOnGroupPage() {
-        click(By.linkText("group page"));
+    public void selectGroup() {
+        click(By.xpath("//input[@type='checkbox']"));
     }
 
+    public void initGroupModification() {
+        click(By.name("edit"));
+    }
+
+    public void submitGroupModification() {
+        click(By.name("update"));
+    }
+
+    public void deleteGroup() {
+        click(By.name("delete"));
+    }
 }

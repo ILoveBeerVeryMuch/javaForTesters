@@ -25,4 +25,24 @@ public class PersonHelper extends BaseHelper{
         type(By.name("email"), person.getEmail());
     }
 
+    public void clickEditPerson() {
+        click(By.xpath("//img[@title='Edit']"));
+    }
+
+    public void updatePersonForm() {
+        click(By.name("update"));
+    }
+
+    public void deletePersonForm() {
+        click(By.name("delete"));
+    }
+
+    public void selectPerson() {
+        click(By.xpath("//input[@type='checkbox']"));
+    }
+
+    public void deletePerson() {
+        click(By.xpath("//input[@value='Delete']"));
+        confirm();
+    }
 }

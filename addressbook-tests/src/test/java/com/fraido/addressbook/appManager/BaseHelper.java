@@ -21,6 +21,10 @@ public class BaseHelper {
         wd.findElement(locator).sendKeys(texzt);
     }
 
+    public void confirm() {
+        wd.switchTo().alert().accept();
+    }
+
     private boolean isAlertPresent() {
         try {
             wd.switchTo().alert();

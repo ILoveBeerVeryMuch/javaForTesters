@@ -11,7 +11,7 @@ public class GroupCreationTest extends BaseTest {
     applicationManager.getGroupHelper().initGroupCreation();
     applicationManager.getGroupHelper().fillGroupForm(new GroupData("groupName", "groupHeader", "groupFooter"));
     applicationManager.getGroupHelper().submitGroupForm();
-    applicationManager.getGroupHelper().returnOnGroupPage();
+    applicationManager.getNavigationHelper().returnOnGroupPage();
     applicationManager.getSessionHelper().logout();
   }
 
