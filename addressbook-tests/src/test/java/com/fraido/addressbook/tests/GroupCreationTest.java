@@ -12,7 +12,7 @@ public class GroupCreationTest extends BaseTest {
     applicationManager.getGroupHelper().fillGroupForm(new GroupData("groupName", "groupHeader", "groupFooter"));
     applicationManager.getGroupHelper().submitGroupForm();
     applicationManager.getGroupHelper().returnOnGroupPage();
-    applicationManager.logout();
+    applicationManager.getSessionHelper().logout();
   }
 
 }
