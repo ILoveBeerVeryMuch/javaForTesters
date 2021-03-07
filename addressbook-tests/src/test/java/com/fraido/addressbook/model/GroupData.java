@@ -1,4 +1,4 @@
-package com.fraido.addressbook;
+package com.fraido.addressbook.model;
 
 public class GroupData {
     private final String groupName;
