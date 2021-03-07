@@ -8,10 +8,10 @@ public class PersonCreationTest extends BaseTest {
 
   @Test
   public void testPersonCreation() {
-    applicationManager.goToCreatePersonPage();
+    applicationManager.getNavigationHelper().goToCreatePersonPage();
     applicationManager.fillPersonForm(new PersonData("First name", "Middle name", "Last name", "Nickname", "Title", "Company", "88005553555", "test@test.com"));
     applicationManager.submitPersonForm();
-    applicationManager.returnToHomePage();
+    applicationManager.getNavigationHelper().returnToHomePage();
     applicationManager.logout();
   }
 
