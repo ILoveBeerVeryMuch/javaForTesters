@@ -2,6 +2,7 @@ package com.fraido.addressbook.appManager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class BaseHelper {
@@ -15,14 +16,29 @@ public class BaseHelper {
         wd.findElement(locator).click();
     }
 
-    protected void type(By locator, String texzt) {
+    protected void type(By locator, String text) {
         click(locator);
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(texzt);
+        if (text != null) {
+            String existingText = wd.findElement(locator).getAttribute("value");
+            if (!text.equals(existingText)) {
+                wd.findElement(locator).clear();
+                wd.findElement(locator).sendKeys(text);
+            }
+        }
     }
 
     public void confirm() {
         wd.switchTo().alert().accept();
+    }
+
+    public boolean isElementPresent(By locator) {
+        try {
+            wd.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+
     }
 
     private boolean isAlertPresent() {

@@ -39,4 +39,14 @@ public class GroupHelper extends BaseHelper {
     public void deleteGroup() {
         click(By.name("delete"));
     }
+
+    public void createGroup(GroupData groupDate) {
+        initGroupCreation();
+        fillGroupForm(new GroupData("groupName", "groupHeader", "groupFooter"));
+        submitGroupForm();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.xpath("//input[@type='checkbox']"));
+    }
 }
