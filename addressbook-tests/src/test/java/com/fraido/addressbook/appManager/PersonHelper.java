@@ -33,8 +33,8 @@ public class PersonHelper extends BaseHelper{
 
     }
 
-    public void clickEditPerson() {
-        click(By.xpath("//img[@title='Edit']"));
+    public void clickEditPerson(int index) {
+        wd.findElements(By.xpath("//tr[@name='entry']")).get(index).findElement(By.xpath("//img[@title='Edit']")).click();
     }
 
     public void updatePersonForm() {
@@ -45,8 +45,8 @@ public class PersonHelper extends BaseHelper{
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void selectPerson() {
-        click(By.xpath("//input[@type='checkbox']"));
+    public void selectPerson(int index) {
+        wd.findElements(By.xpath("//tr[@name='entry']")).get(index).findElement(By.xpath("//input[@type='checkbox']")).click();
     }
 
     public void deletePerson() {

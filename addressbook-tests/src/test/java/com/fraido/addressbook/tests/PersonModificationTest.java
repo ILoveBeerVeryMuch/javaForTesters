@@ -12,7 +12,7 @@ public class PersonModificationTest extends BaseTest {
   @Test
   public void testPersonModification() {
     List<PersonData> before = applicationManager.getPersonHelper().getPersonList();
-    applicationManager.getPersonHelper().clickEditPerson();
+    applicationManager.getPersonHelper().clickEditPerson(before.size()-1);
     PersonData personData = new PersonData("new first name",  "new last name", "880099988877", "test1@test.com", null);
     applicationManager.getPersonHelper().fillPersonForm(personData, false);
     applicationManager.getPersonHelper().updatePersonForm();
@@ -24,8 +24,6 @@ public class PersonModificationTest extends BaseTest {
     before.add(personData);
     before.sort(byId);
     after.sort(byId);
-    System.out.println(before.get(before.size()-1));
-    System.out.println(after.get(after.size()-1));
     System.out.println(before);
     System.out.println(after);
     Assert.assertEquals(before, after);

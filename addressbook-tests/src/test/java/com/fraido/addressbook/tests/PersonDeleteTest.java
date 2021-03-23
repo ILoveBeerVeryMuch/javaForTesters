@@ -16,7 +16,7 @@ public class PersonDeleteTest extends BaseTest {
       applicationManager.getNavigationHelper().returnToHomePage();
     }
     List<PersonData> before = applicationManager.getPersonHelper().getPersonList();
-    applicationManager.getPersonHelper().clickEditPerson();
+    applicationManager.getPersonHelper().clickEditPerson(before.size()-1);
     applicationManager.getPersonHelper().deletePersonForm();
     List<PersonData> after = applicationManager.getPersonHelper().getPersonList();
     before.remove(before.size()-1);
@@ -31,7 +31,7 @@ public class PersonDeleteTest extends BaseTest {
       applicationManager.getNavigationHelper().returnToHomePage();
     }
     List<PersonData> before = applicationManager.getPersonHelper().getPersonList();
-    applicationManager.getPersonHelper().selectPerson();
+    applicationManager.getPersonHelper().selectPerson(before.size()-1);
     applicationManager.getPersonHelper().deletePerson();
     List<PersonData> after = applicationManager.getPersonHelper().getPersonList();
     before.remove(before.size()-1);
