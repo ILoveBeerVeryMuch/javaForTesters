@@ -3,6 +3,10 @@ package com.fraido.addressbook.appManager;
 import com.fraido.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupHelper extends BaseHelper {
 
@@ -24,8 +28,8 @@ public class GroupHelper extends BaseHelper {
         click(By.name("new"));
     }
 
-    public void selectGroup() {
-        click(By.xpath("//input[@type='checkbox']"));
+    public void selectGroup(int index) {
+        wd.findElements(By.xpath("//input[@type='checkbox']")).get(index).click();
     }
 
     public void initGroupModification() {
@@ -48,5 +52,18 @@ public class GroupHelper extends BaseHelper {
 
     public boolean isThereAGroup() {
         return isElementPresent(By.xpath("//input[@type='checkbox']"));
+    }
+
+    public int getGroupsCounter() {
+        return wd.findElements(By.xpath("//input[@type='checkbox']")).size();
+    }
+
+    public List<GroupData> getGroupList() {
+        List<GroupData> groups = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element: elements) {
+            groups.add( new GroupData(element.getText(), null, null, Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))));
+        }
+        return groups;
     }
 }
