@@ -1,42 +1,30 @@
 package com.fraido.addressbook.tests;
 
-import com.fraido.addressbook.model.GroupData;
 import com.fraido.addressbook.model.PersonData;
-import org.testng.Assert;
+import com.fraido.addressbook.model.Persons;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PersonDeleteTest extends BaseTest {
 
-  @Test
-  public void testPersonDeleteByEditPage() {
-    if (!applicationManager.getPersonHelper().isThereAPerson()) {
-      applicationManager.getPersonHelper().createPerson();
-      applicationManager.getNavigationHelper().returnToHomePage();
+  @BeforeMethod
+  public void ensurePrecondition() {
+    if (applicationManager.person().all().size() == 0) {
+      applicationManager.person().create( new PersonData().withFirstName("First name").withLastName("Last name").withNumber("88005553555")
+              .withEmail( "test@test.com").withGroup("groupName"));
     }
-    List<PersonData> before = applicationManager.getPersonHelper().getPersonList();
-    applicationManager.getPersonHelper().clickEditPerson(before.size()-1);
-    applicationManager.getPersonHelper().deletePersonForm();
-    List<PersonData> after = applicationManager.getPersonHelper().getPersonList();
-    before.remove(before.size()-1);
-    Assert.assertEquals(before, after);
-    applicationManager.getSessionHelper().logout();
   }
 
   @Test
   public void testPersonDeleteByMainPage() {
-    if (!applicationManager.getPersonHelper().isThereAPerson()) {
-      applicationManager.getPersonHelper().createPerson();
-      applicationManager.getNavigationHelper().returnToHomePage();
-    }
-    List<PersonData> before = applicationManager.getPersonHelper().getPersonList();
-    applicationManager.getPersonHelper().selectPerson(before.size()-1);
-    applicationManager.getPersonHelper().deletePerson();
-    List<PersonData> after = applicationManager.getPersonHelper().getPersonList();
-    before.remove(before.size()-1);
-    Assert.assertEquals(before, after);
-    applicationManager.getSessionHelper().logout();
+    Persons before = applicationManager.person().all();
+    PersonData personData = before.iterator().next();
+    applicationManager.person().delete(personData);
+    Persons after = applicationManager.person().all();
+    assertThat(after , equalTo(before.without(personData)));
   }
 
 

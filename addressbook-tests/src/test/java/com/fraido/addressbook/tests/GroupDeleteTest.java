@@ -1,29 +1,32 @@
 package com.fraido.addressbook.tests;
 
 import com.fraido.addressbook.model.GroupData;
-import org.testng.Assert;
+import com.fraido.addressbook.model.Groups;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupDeleteTest extends BaseTest {
 
+  @BeforeMethod
+  public void ensurePrecondition() {
+    applicationManager.goTo().groupPage();
+    if (applicationManager.group().all().size() == 0) {
+      applicationManager.group().create(new GroupData().withName("groupName").withHeader("groupHeader").withFooter("groupFooter"));
+      applicationManager.goTo().returnOnGroupPage();
+    }
+  }
+
   @Test
   public void testGroupDelete() {
-    applicationManager.getNavigationHelper().goToGroupPage();
-    if (!applicationManager.getGroupHelper().isThereAGroup()) {
-      applicationManager.getGroupHelper().createGroup(new GroupData("groupName", "groupHeader", "groupFooter"));
-      applicationManager.getNavigationHelper().returnOnGroupPage();
-    }
-    List<GroupData> before = applicationManager.getGroupHelper().getGroupList();
-    applicationManager.getGroupHelper().selectGroup(before.size()-1);
-    applicationManager.getGroupHelper().deleteGroup();
-    applicationManager.getNavigationHelper().returnOnGroupPage();
-    List<GroupData> after = applicationManager.getGroupHelper().getGroupList();
-    before.remove(before.size()-1);
-    Assert.assertEquals(before, after);
-    
-    applicationManager.getSessionHelper().logout();
+    Groups before = applicationManager.group().all();
+    GroupData deletedGroup = before.iterator().next();
+    applicationManager.group().delete(deletedGroup);
+    applicationManager.goTo().returnOnGroupPage();
+    Groups after = applicationManager.group().all();
+    assertThat(after , equalTo(before.without(deletedGroup)));
   }
 
 }

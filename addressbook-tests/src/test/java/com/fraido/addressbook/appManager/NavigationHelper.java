@@ -10,15 +10,15 @@ public class NavigationHelper extends BaseHelper{
         super(wd);
     }
 
-    public void goToGroupPage() {
+    public void groupPage() {
         click(By.linkText("groups"));
     }
 
-    public void returnToHomePage() {
+    public void homePage() {
         click(By.linkText("home page"));
     }
 
-    public void goToCreatePersonPage() {
+    public void createPersonPage() {
         click(By.linkText("add new"));
     }
 

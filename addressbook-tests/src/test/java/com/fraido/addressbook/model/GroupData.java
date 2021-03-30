@@ -3,22 +3,29 @@ package com.fraido.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-    private final String groupName;
-    private final String groupHeader;
-    private final String groupFooter;
-    private int id;
+    private String groupName;
+    private String groupHeader;
+    private String groupFooter;
+    private int id = Integer.MAX_VALUE;
 
-    public GroupData(String groupName, String groupHeader, String groupFooter, int id) {
-        this.groupName = groupName;
+    public GroupData withHeader(String groupHeader) {
         this.groupHeader = groupHeader;
-        this.groupFooter = groupFooter;
-        this.id = id;
+        return this;
     }
-    public GroupData(String groupName, String groupHeader, String groupFooter) {
-        this.groupName = groupName;
-        this.groupHeader = groupHeader;
+
+    public GroupData withFooter(String groupFooter) {
         this.groupFooter = groupFooter;
-        this.id = Integer.MAX_VALUE;
+        return this;
+    }
+
+    public GroupData withName(String groupName) {
+        this.groupName = groupName;
+        return this;
+    }
+
+    public GroupData withId(int id) {
+        this.id = id;
+        return this;
     }
 
     public String getGroupName() {
@@ -37,6 +44,10 @@ public class GroupData {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "GroupData{" +
@@ -45,20 +56,17 @@ public class GroupData {
                 '}';
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
-        return Objects.equals(groupName, groupData.groupName);
+        return id == groupData.id &&
+                Objects.equals(groupName, groupData.groupName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupName);
+        return Objects.hash(groupName, id);
     }
 }
