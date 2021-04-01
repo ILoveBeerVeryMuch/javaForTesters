@@ -34,8 +34,8 @@ public class PersonHelper extends BaseHelper{
 
     }
 
-    public void clickEditPerson() {
-        wd.findElement(By.xpath("//img[@title='Edit']")).click();
+    public void clickEditPerson(int index) {
+        wd.findElement(By.xpath(String.format("//a[@href='edit.php?id=%s']", index))).click();
     }
 
     public void updatePersonForm() {
@@ -73,8 +73,7 @@ public class PersonHelper extends BaseHelper{
     }
 
     public void update(PersonData person) {
-        selectGroupById(person.getId());
-        clickEditPerson();
+        clickEditPerson(person.getId());
         type(By.name("firstname"), person.getFirstName());
         type(By.name("lastname"), person.getLastName());
         type(By.name("mobile"), person.getNumber());
