@@ -11,12 +11,12 @@ public class GroupCreationTest extends BaseTest {
 
   @Test
   public void testGroupCreation() {
-    applicationManager.goTo().groupPage();
-    Groups before = applicationManager.group().all();
+    app.goTo().groupPage();
+    Groups before = app.group().all();
     GroupData groupData = new GroupData().withName("groupName").withHeader("groupHeader").withFooter("groupFooter");
-    applicationManager.group().create(groupData);
-    applicationManager.goTo().returnOnGroupPage();
-    Groups after = applicationManager.group().all();
+    app.group().create(groupData);
+    app.goTo().returnOnGroupPage();
+    Groups after = app.group().all();
     assertThat(after.size() , equalTo(before.size()+1));
     assertThat(after , equalTo(
             before.withAdded(groupData.withId(after.stream().mapToInt(g ->g.getId()).max().getAsInt()))));

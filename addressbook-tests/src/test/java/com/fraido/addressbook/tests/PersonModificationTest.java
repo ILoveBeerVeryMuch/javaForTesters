@@ -10,24 +10,25 @@ public class PersonModificationTest extends BaseTest {
 
   @BeforeMethod
   public void ensurePrecondition() {
-    if (applicationManager.person().all().size() == 0) {
-      applicationManager.person().create( new PersonData().withFirstName("First name").withLastName("Last name").withNumber("88005553555")
+    if (app.person().all().size() == 0) {
+      app.person().create( new PersonData().withFirstName("First name").withLastName("Last name").withMobilePhone("88005553555")
               .withEmail( "test@test.com").withGroup("groupName"));
     }
   }
 
   @Test
   public void testPersonModification() {
-    Persons before = applicationManager.person().all();
+    app.goTo().homePage();
+    Persons before = app.person().all();
     PersonData modifiedPerson = before.iterator().next();
     PersonData newPerson = new PersonData().withFirstName("new first name")
             .withLastName("new last name")
             .withNumber("880099988877")
             .withEmail( "test1@test.com")
             .withId(modifiedPerson.getId());
-    applicationManager.person().update(newPerson);
-    applicationManager.goTo().homePage();
-    Persons after = applicationManager.person().all();
+    app.person().update(newPerson);
+    app.goTo().homePage();
+    Persons after = app.person().all();
     Assert.assertEquals(after, before.without(modifiedPerson).withAdded(newPerson));
   }
 

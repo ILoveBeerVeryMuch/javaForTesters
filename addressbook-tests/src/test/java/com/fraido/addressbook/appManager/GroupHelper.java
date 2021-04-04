@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class GroupHelper extends BaseHelper {
+    private Groups groupCache = null;
 
     public GroupHelper(WebDriver wd) {
         super(wd);
@@ -44,15 +45,19 @@ public class GroupHelper extends BaseHelper {
         initGroupCreation();
         fillGroupForm(groupDate);
         submitGroupForm();
+        groupCache = null;
     }
 
     public Groups all() {
-        Groups groups = new Groups();
+        if (groupCache != null) {
+            return new Groups(groupCache);
+        }
+        groupCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element: elements) {
-            groups.add(new GroupData().withName(element.getText()).withHeader(null).withFooter(null).withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))));
-        }
-        return groups;
+            groupCache.add(new GroupData().withName(element.getText()).withHeader(null).withFooter(null).withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))));
+              }
+        return new Groups(groupCache);
     }
 
     public void modify(GroupData groupData) {
@@ -60,10 +65,12 @@ public class GroupHelper extends BaseHelper {
         initGroupModification();
         fillGroupForm(groupData);
         submitGroupModification();
+        groupCache = null;
     }
 
     public void delete(GroupData group) {
         selectGroupById(group.getId());
+        groupCache = null;
         deleteGroup();
     }
 

@@ -12,20 +12,20 @@ public class GroupDeleteTest extends BaseTest {
 
   @BeforeMethod
   public void ensurePrecondition() {
-    applicationManager.goTo().groupPage();
-    if (applicationManager.group().all().size() == 0) {
-      applicationManager.group().create(new GroupData().withName("groupName").withHeader("groupHeader").withFooter("groupFooter"));
-      applicationManager.goTo().returnOnGroupPage();
+    app.goTo().groupPage();
+    if (app.group().all().size() == 0) {
+      app.group().create(new GroupData().withName("groupName").withHeader("groupHeader").withFooter("groupFooter"));
+      app.goTo().returnOnGroupPage();
     }
   }
 
   @Test
   public void testGroupDelete() {
-    Groups before = applicationManager.group().all();
+    Groups before = app.group().all();
     GroupData deletedGroup = before.iterator().next();
-    applicationManager.group().delete(deletedGroup);
-    applicationManager.goTo().returnOnGroupPage();
-    Groups after = applicationManager.group().all();
+    app.group().delete(deletedGroup);
+    app.goTo().returnOnGroupPage();
+    Groups after = app.group().all();
     assertThat(after , equalTo(before.without(deletedGroup)));
   }
 

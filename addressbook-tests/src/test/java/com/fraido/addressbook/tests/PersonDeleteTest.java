@@ -12,18 +12,19 @@ public class PersonDeleteTest extends BaseTest {
 
   @BeforeMethod
   public void ensurePrecondition() {
-    if (applicationManager.person().all().size() == 0) {
-      applicationManager.person().create( new PersonData().withFirstName("First name").withLastName("Last name").withNumber("88005553555")
+    if (app.person().all().size() == 0) {
+      app.person().create( new PersonData().withFirstName("First name").withLastName("Last name").withMobilePhone("88005553555")
               .withEmail( "test@test.com").withGroup("groupName"));
     }
   }
 
   @Test
   public void testPersonDeleteByMainPage() {
-    Persons before = applicationManager.person().all();
+    app.goTo().homePage();
+    Persons before = app.person().all();
     PersonData personData = before.iterator().next();
-    applicationManager.person().delete(personData);
-    Persons after = applicationManager.person().all();
+    app.person().delete(personData);
+    Persons after = app.person().all();
     assertThat(after , equalTo(before.without(personData)));
   }
 

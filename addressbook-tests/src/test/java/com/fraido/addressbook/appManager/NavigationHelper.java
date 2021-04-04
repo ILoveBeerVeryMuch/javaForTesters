@@ -15,7 +15,7 @@ public class NavigationHelper extends BaseHelper{
     }
 
     public void homePage() {
-        click(By.linkText("home page"));
+        click(By.xpath("//a[@href='./']"));
     }
 
     public void createPersonPage() {

@@ -7,16 +7,16 @@ import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
 
-    protected static final ApplicationManager applicationManager = new ApplicationManager(BrowserType.CHROME);
+    protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {
-        applicationManager.init();
+        app.init();
     }
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
-        applicationManager.stop();
+        app.stop();
     }
 
 }

@@ -6,9 +6,17 @@ public class PersonData {
     private String firstName;
     private  String lastName;;
     private  String number;
-    private  String email;
+    private  String emails;
     private  String group;
     private int id = Integer.MAX_VALUE;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String allPhones;
+    private String firstEmail;
+    private String secondEmail;
+    private String thirdEmail;
+
 
     public PersonData withFirstName(String firstName) {
         this.firstName = firstName;
@@ -25,8 +33,8 @@ public class PersonData {
         return this;
     }
 
-    public PersonData withEmail(String email) {
-        this.email = email;
+    public PersonData withEmail(String emails) {
+        this.emails = emails;
         return this;
     }
 
@@ -40,6 +48,41 @@ public class PersonData {
         return this;
     }
 
+    public PersonData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public PersonData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public PersonData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public PersonData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public PersonData withFirstEmail(String firstEmail) {
+        this.firstEmail = firstEmail;
+        return this;
+    }
+
+    public PersonData withSecondEmail(String secondEmail) {
+        this.secondEmail = secondEmail;
+        return this;
+    }
+
+    public PersonData withThirdEmail(String thirdEmail) {
+        this.thirdEmail = thirdEmail;
+        return this;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -48,12 +91,12 @@ public class PersonData {
         return lastName;
     }
 
-    public String getNumber() {
+    public String allPhones() {
         return number;
     }
 
     public String getEmail() {
-        return email;
+        return emails;
     }
 
     public String getGroup() { return group;}
@@ -62,6 +105,33 @@ public class PersonData {
         return id;
     }
 
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public String getFirstEmail() {
+        return firstEmail;
+    }
+
+    public String getSecondEmail() {
+        return secondEmail;
+    }
+
+    public String getThirdEmail() {
+        return thirdEmail;
+    }
 
     @Override
     public boolean equals(Object o) {
