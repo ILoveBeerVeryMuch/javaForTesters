@@ -25,8 +25,9 @@ public class PersonHelper extends BaseHelper{
     public void fillForm(PersonData person, boolean creation) {
         type(By.name("firstname"), person.getFirstName());
         type(By.name("lastname"), person.getLastName());
-        type(By.name("mobile"), person.allPhones());
+        type(By.name("mobile"), person.getMobilePhone());
         type(By.name("email"), person.getEmail());
+        attach(By.name("photo"), person.getPhoto());
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(person.getGroup());
         } else {
@@ -52,8 +53,11 @@ public class PersonHelper extends BaseHelper{
     }
 
     public void create(PersonData personData) {
-        fillForm( personData.withFirstName("First name").withLastName("Last name").withMobilePhone("88005553555")
-                .withEmail( "test@test.com").withGroup("groupName"), true);
+        fillForm( personData.withFirstName(personData.getFirstName()).withLastName(personData.getLastName())
+                .withMobilePhone(personData.getMobilePhone())
+                .withEmail(personData.getEmail())
+                .withGroup("groupName")
+                .withPhoto(personData.getPhoto()), true);
         submitPersonForm();
         personCache = null;
     }

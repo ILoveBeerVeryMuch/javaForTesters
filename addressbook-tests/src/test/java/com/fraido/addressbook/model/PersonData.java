@@ -1,22 +1,29 @@
 package com.fraido.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
+import java.io.File;
 import java.util.Objects;
 
 public class PersonData {
+    @Expose
     private String firstName;
+    @Expose
     private  String lastName;;
     private  String number;
+    @Expose
     private  String emails;
     private  String group;
     private int id = Integer.MAX_VALUE;
     private String homePhone;
+    @Expose
     private String mobilePhone;
     private String workPhone;
     private String allPhones;
     private String firstEmail;
     private String secondEmail;
     private String thirdEmail;
-
+    private File photo;
 
     public PersonData withFirstName(String firstName) {
         this.firstName = firstName;
@@ -83,6 +90,11 @@ public class PersonData {
         return this;
     }
 
+    public PersonData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -131,6 +143,10 @@ public class PersonData {
 
     public String getThirdEmail() {
         return thirdEmail;
+    }
+
+    public File getPhoto() {
+        return photo;
     }
 
     @Override
