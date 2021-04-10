@@ -48,11 +48,11 @@ public class PersonCreationTest extends BaseTest {
       line = reader.readLine();
     }
     Gson gson = new Gson();
-    List<PersonData> persons = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
+    List<PersonData> persons = gson.fromJson(json, new TypeToken<List<PersonData>>(){}.getType());
     return persons.stream().map(g -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
-  @Test (dataProvider = "validPersons")
+  @Test (dataProvider = "validGPersonsFromJson")
   public void testPersonCreation(PersonData personData) {
     app.goTo().homePage();
     File photo = new File("src/test/resources/cat.jpg");

@@ -54,7 +54,7 @@ public class PersonDataGenerator {
     private void saveAsCsv(List<PersonData> persons, File file) throws IOException {
         Writer writer = new FileWriter(file);
         for (PersonData person : persons) {
-            writer.write(String.format("%s; %s; %s; %s\n", person.getFirstName(), person.getLastName(), person.getEmail(),
+            writer.write(String.format("%s;%s;%s;%s\n", person.getFirstName(), person.getLastName(), person.getEmail(),
             person.getMobilePhone()));
         }
         writer.close();
