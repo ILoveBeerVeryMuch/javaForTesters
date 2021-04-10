@@ -53,11 +53,6 @@ public class PersonHelper extends BaseHelper{
     }
 
     public void create(PersonData personData) {
-        System.out.println(personData.getFirstName());
-        System.out.println(personData.getLastName());
-        System.out.println(personData.getMobilePhone());
-        System.out.println(personData.getEmail());
-        System.out.println(personData.getPhoto());
         fillForm( personData.withFirstName(personData.getFirstName()).withLastName(personData.getLastName())
                 .withMobilePhone(personData.getMobilePhone())
                 .withEmail(personData.getEmail())

@@ -46,18 +46,18 @@ public class PersonDataGenerator {
     private static void saveAsJson(List<PersonData> persons, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(persons);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try(Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 
     private void saveAsCsv(List<PersonData> persons, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for (PersonData person : persons) {
-            writer.write(String.format("%s;%s;%s;%s\n", person.getFirstName(), person.getLastName(), person.getEmail(),
-            person.getMobilePhone()));
+        try(Writer writer = new FileWriter(file)) {
+            for (PersonData person : persons) {
+                writer.write(String.format("%s;%s;%s;%s\n", person.getFirstName(), person.getLastName(), person.getEmail(),
+                        person.getMobilePhone()));
+            }
         }
-        writer.close();
     }
 
     private List<PersonData> generatePersons(int count) {

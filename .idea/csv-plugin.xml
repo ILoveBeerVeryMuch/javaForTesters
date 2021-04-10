@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\addressbook-tests\build.gradle">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\addressbook-tests\src\test\java\com\fraido\addressbook\generators\PersonDataGenerator.java">
           <value>
             <Attribute>

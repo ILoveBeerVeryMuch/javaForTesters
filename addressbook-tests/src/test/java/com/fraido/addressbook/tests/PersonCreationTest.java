@@ -1,6 +1,5 @@
 package com.fraido.addressbook.tests;
 
-import com.fraido.addressbook.model.GroupData;
 import com.fraido.addressbook.model.PersonData;
 import com.fraido.addressbook.model.Persons;
 import com.google.gson.Gson;
@@ -25,22 +24,24 @@ public class PersonCreationTest extends BaseTest {
   @DataProvider
   public Iterator<Object[]> validPersons() throws IOException {
     List<Object[]> list = new ArrayList<>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/persons.csv")));
-    String line = reader.readLine();
-    while (line != null) {
-      String[] split = line.split(";");
-      list.add(new Object[] {new PersonData().withFirstName(split[0])
-              .withLastName(split[1])
-              .withEmail(split[2])
-              .withMobilePhone(split[3])});
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/persons.csv")))) {
+      String line = reader.readLine();
+      while (line != null) {
+        String[] split = line.split(";");
+        list.add(new Object[]{new PersonData().withFirstName(split[0])
+                .withLastName(split[1])
+                .withEmail(split[2])
+                .withMobilePhone(split[3])});
+        line = reader.readLine();
+      }
+      return list.iterator();
     }
-    return list.iterator();
   }
 
   @DataProvider
   public Iterator<Object[]> validGPersonsFromJson() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/persons.json")));
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/persons.json")))) {
+
     String json = "";
     String line = reader.readLine();
     while (line != null) {
@@ -50,6 +51,7 @@ public class PersonCreationTest extends BaseTest {
     Gson gson = new Gson();
     List<PersonData> persons = gson.fromJson(json, new TypeToken<List<PersonData>>(){}.getType());
     return persons.stream().map(g -> new Object[]{g}).collect(Collectors.toList()).iterator();
+    }
   }
 
   @Test (dataProvider = "validGPersonsFromJson")
