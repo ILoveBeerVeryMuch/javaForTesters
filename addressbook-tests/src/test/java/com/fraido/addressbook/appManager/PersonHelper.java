@@ -26,7 +26,7 @@ public class PersonHelper extends BaseHelper{
         type(By.name("firstname"), person.getFirstName());
         type(By.name("lastname"), person.getLastName());
         type(By.name("mobile"), person.getMobilePhone());
-        type(By.name("email"), person.getEmail());
+        type(By.name("email"), person.getFirstEmail());
         attach(By.name("photo"), person.getPhoto());
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(person.getGroup());
@@ -48,16 +48,15 @@ public class PersonHelper extends BaseHelper{
     public void delete(PersonData personData) {
         selectGroupById(personData.getId());
         click(By.xpath("//input[@value='Delete']"));
-        personCache = null;
         confirm();
+        personCache = null;
     }
 
     public void create(PersonData personData) {
         fillForm( personData.withFirstName(personData.getFirstName()).withLastName(personData.getLastName())
                 .withMobilePhone(personData.getMobilePhone())
-                .withEmail(personData.getEmail())
-                .withGroup("groupName")
-                .withPhoto(personData.getPhoto()), true);
+                .withFirstEmail(personData.getFirstEmail())
+                .withGroup("groupName"), true);
         submitPersonForm();
         personCache = null;
     }
@@ -71,7 +70,7 @@ public class PersonHelper extends BaseHelper{
         for (WebElement element: elements) {
             personCache.add( new PersonData().withFirstName(element.findElement(By.cssSelector("td:nth-child(3)")).getText())
                     .withLastName(element.findElement(By.cssSelector("td:nth-child(2)")).getText())
-                    .withEmail(element.findElement(By.cssSelector("td:nth-child(5)")).getText())
+                    .withFirstEmail(element.findElement(By.cssSelector("td:nth-child(5)")).getText())
                     .withAllPhones(element.findElement(By.cssSelector("td:nth-child(6)")).getText())
                     .withGroup("groupName")
                     .withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")))) ;
@@ -88,7 +87,7 @@ public class PersonHelper extends BaseHelper{
         type(By.name("firstname"), person.getFirstName());
         type(By.name("lastname"), person.getLastName());
         type(By.name("mobile"), person.getMobilePhone());
-        type(By.name("email"), person.getEmail());
+        type(By.name("email"), person.getFirstEmail());
         Assert.assertFalse(isElementPresent(By.name("new_group")));
         updatePersonForm();
         personCache = null;

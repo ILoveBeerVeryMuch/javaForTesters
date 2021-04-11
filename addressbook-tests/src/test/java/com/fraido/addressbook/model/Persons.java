@@ -2,6 +2,7 @@ package com.fraido.addressbook.model;
 
 import com.google.common.collect.ForwardingSet;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,10 @@ public class Persons extends ForwardingSet<PersonData> {
 
     public Persons(Persons persons) {
         this.delegate = new HashSet<PersonData>(persons.delegate);
+    }
+
+    public Persons(Collection<PersonData> persons) {
+        this.delegate = new HashSet<PersonData>(persons);
     }
 
     public Persons() {

@@ -58,11 +58,11 @@ public class PersonCreationTest extends BaseTest {
   public void testPersonCreation(PersonData personData) {
     app.goTo().homePage();
     File photo = new File("src/test/resources/cat.jpg");
-    Persons before = app.person().all();
+    Persons before = app.db().persons();
     app.goTo().createPersonPage();
     app.person().create(personData.withPhoto(photo));
     app.goTo().homePage();
-    Persons after = app.person().all();
+    Persons after = app.db().persons();
     assertThat(after.size() , equalTo(before.size()+1));
     assertThat(after, equalTo(
             before.withAdded(personData.withId(after.stream().mapToInt(g ->g.getId()).max().getAsInt()))));

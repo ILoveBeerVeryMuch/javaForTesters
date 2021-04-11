@@ -1,29 +1,53 @@
 package com.fraido.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 public class PersonData {
     @Expose
+    @Column(name = "firstname")
     private String firstName;
     @Expose
+    @Column(name = "lastname")
     private  String lastName;;
+    @Transient
     private  String number;
     @Expose
+    @Transient
     private  String emails;
+    @Transient
     private  String group;
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
+    @Transient
     private String allPhones;
+    @Column(name = "email")
+    @Type(type = "text")
     private String firstEmail;
+    @Transient
     private String secondEmail;
+    @Transient
     private String thirdEmail;
-    private File photo;
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
     public PersonData withFirstName(String firstName) {
         this.firstName = firstName;
@@ -91,7 +115,7 @@ public class PersonData {
     }
 
     public PersonData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -146,7 +170,7 @@ public class PersonData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     @Override
@@ -156,12 +180,18 @@ public class PersonData {
         PersonData that = (PersonData) o;
         return id == that.id &&
                 Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName);
+                Objects.equals(lastName, that.lastName) &&
+//                Objects.equals(homePhone, that.homePhone) &&
+                Objects.equals(mobilePhone, that.mobilePhone) &&
+//                Objects.equals(workPhone, that.workPhone) &&
+                Objects.equals(firstEmail, that.firstEmail);
+//                Objects.equals(secondEmail, that.secondEmail) &&
+//                Objects.equals(thirdEmail, that.thirdEmail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, id);
+        return Objects.hash(firstName, lastName, id, homePhone, mobilePhone, workPhone, allPhones, firstEmail, secondEmail, thirdEmail);
     }
 
     @Override
@@ -170,6 +200,8 @@ public class PersonData {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", id=" + id +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", firstEmail='" + firstEmail + '\'' +
                 '}';
     }
 }

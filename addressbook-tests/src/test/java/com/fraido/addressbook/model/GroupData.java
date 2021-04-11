@@ -1,16 +1,34 @@
 package com.fraido.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "group_list")
 public class GroupData {
     @Expose
+    @Column(name = "group_name")
     private String groupName;
+
     @Expose
+    @Column(name = "group_header")
+    @Type(type = "text")
     private String groupHeader;
+
     @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private String groupFooter;
+
+    @Id
+    @Column(name = "group_id")
     private int id = Integer.MAX_VALUE;
 
     public GroupData withHeader(String groupHeader) {
@@ -54,24 +72,28 @@ public class GroupData {
     }
 
     @Override
-    public String toString() {
-        return "GroupData{" +
-                "groupName='" + groupName + '\''+
-                "id='" + id + '\''+
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
         return id == groupData.id &&
-                Objects.equals(groupName, groupData.groupName);
+                Objects.equals(groupName, groupData.groupName) &&
+                Objects.equals(groupHeader, groupData.groupHeader) &&
+                Objects.equals(groupFooter, groupData.groupFooter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupName, id);
+        return Objects.hash(groupName, groupHeader, groupFooter, id);
+    }
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "groupName='" + groupName + '\'' +
+                ", groupHeader='" + groupHeader + '\'' +
+                ", groupFooter='" + groupFooter + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

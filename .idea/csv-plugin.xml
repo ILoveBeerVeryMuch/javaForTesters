@@ -10,7 +10,42 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\addressbook-tests\src\test\java\com\fraido\addressbook\appManager\ApplicationManager.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\addressbook-tests\src\test\java\com\fraido\addressbook\appManager\ВИРудзук.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\addressbook-tests\src\test\java\com\fraido\addressbook\generators\PersonDataGenerator.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\addressbook-tests\src\test\java\com\fraido\addressbook\model\PersonData.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\addressbook-tests\src\test\java\com\fraido\addressbook\tests\GroupModificationTest.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\addressbook-tests\src\test\java\com\fraido\addressbook\tests\HibernateDBConecterTest.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />

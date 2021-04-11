@@ -12,19 +12,20 @@ public class PersonDeleteTest extends BaseTest {
 
   @BeforeMethod
   public void ensurePrecondition() {
-    if (app.person().all().size() == 0) {
+    if (app.db().persons().size() == 0) {
       app.person().create( new PersonData().withFirstName("First name").withLastName("Last name").withMobilePhone("88005553555")
               .withEmail( "test@test.com").withGroup("groupName"));
     }
   }
 
   @Test
-  public void testPersonDeleteByMainPage() {
+  public void testPersonDeleteByMainPage() throws InterruptedException {
     app.goTo().homePage();
-    Persons before = app.person().all();
+    Persons before = app.db().persons();
     PersonData personData = before.iterator().next();
     app.person().delete(personData);
-    Persons after = app.person().all();
+    app.goTo().homePage();
+    Persons after = app.db().persons();
     assertThat(after , equalTo(before.without(personData)));
   }
 
